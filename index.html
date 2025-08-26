@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetterSkillCoaching Prototype - Game Coaching Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/04125a405c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="photos/NEW LOGO.jpg" alt="Logo">
+                <span>BetterSkillCoaching</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="#coaches"><i class="fa-solid fa-user"></i> Coaches</a></li>
+                    <li><a href="#games"><i class="fa-solid fa-gamepad"></i> Games</a></li>
+                    <li><a href="#pricing"><i class="fa-solid fa-money-bill"></i> Pricing</a></li>
+                    <li><a href="#about"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn login" onclick="window.location.href='Log in.html'">Log In</button>
+                <button class="btn signup" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Level Up Your Game with Pro Coaching</h1>
+                <p>Connect with professional coaches to improve your skills and climb the ranks.</p>
+                <div class="cta-buttons">
+                    <button class="btn primary">
+                        <i class="fa-solid fa-magnifying-glass"></i> Find a Coach
+                    </button>
+                    <button class="btn secondary">
+                        <i class="fa-solid fa-headset"></i> Become a Coach
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="photos/COACH.jpg" alt="Gamer playing with coach">
+            </div>
+        </div>
+    </section>
+
+    <section class="games-section" id="games">
+        <div class="container">
+            <h2>Popular Games</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="photos/LOL.png" alt="League of Legends">
+                    <h3>League of Legends</h3>
+                </div>
+                <div class="game-card">
+                    <img src="photos/VALO.png" alt="Valorant">
+                    <h3>Valorant</h3>
+                </div>
+                <div class="game-card">
+                    <img src="photos/CSGo.png" alt="CS:GO">
+                    <h3>CS:GO</h3>
+                </div>
+                <div class="game-card">
+                    <img src="photos/DOTA.jpg" alt="Dota 2">
+                    <h3>Dota 2</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="coaches-section" id="coaches">
+        <div class="container">
+            <h2>Featured Coaches</h2>
+            <div class="coaches-grid">
+                <!-- Coach cards will be populated by JavaScript -->
+            </div>
+            <button class="btn view-all">View All Coaches</button>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Students Say</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <div class="quote">"My rank improved from Silver to Diamond in just 2 months!"</div>
+                    <div class="author">
+                        <img src="photos/User 1.png" alt="User">
+                        <span>Mark T.</span>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="quote">"The personalized coaching sessions helped me identify my weaknesses."</div>
+                    <div class="author">
+                        <img src="photos/user 2.png" alt="User">
+                        <span>Sarah K.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>Pricing Plans</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">$15<span>/session</span></div>
+                    <ul>
+                        <li>1 hour session</li>
+                        <li>Game analysis</li>
+                        <li>Basic feedback</li>
+                    </ul>
+                    <button class="btn primary">Choose Plan</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Premium</h3>
+                    <div class="price">$25<span>/session</span></div>
+                    <ul>
+                        <li>1.5 hour session</li>
+                        <li>Detailed analysis</li>
+                        <li>Custom drills</li>
+                        <li>Follow-up notes</li>
+                    </ul>
+                    <button class="btn primary">Choose Plan</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Pro</h3>
+                    <div class="price">$40<span>/session</span></div>
+                    <ul>
+                        <li>2 hour session</li>
+                        <li>In-depth analysis</li>
+                        <li>Personalized training</li>
+                        <li>Progress tracking</li>
+                    </ul>
+                    <button class="btn primary">Choose Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BetterSkillCoaching</h3>
+                    <p>Connecting gamers with professional coaches to help them reach their full potential.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home"><i class="fa-solid fa-house"></i> Home</a></li>
+                        <li><a href="#coaches"><i class="fa-solid fa-user"></i> Coaches</a></li>
+                        <li><a href="#games"><i class="fa-solid fa-gamepad"></i> Games</a></li>
+                        <li><a href="#pricing"><i class="fa-solid fa-money-bill"></i> Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@BetterSkillCoaching.gg</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitch"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 BetterSkillCoaching.gg. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="function.js"></script>
+</body>
+</html>
