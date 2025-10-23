@@ -36,7 +36,7 @@
                     <label class="remember-me">
                         <input type="checkbox"> Remember me
                     </label>
-                    <a href="#" class="forgot-password">Forgot password?</a>
+                    <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot password?</a>
                 </div>
                 
                 <button type="submit" class="btn primary auth-btn">Log In</button>
@@ -56,6 +56,27 @@
                         <i class="fab fa-discord"></i> Discord
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Reset Your Password</h2>
+            <p>Enter your email address and we'll send you a link to reset your password.</p>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="resetEmail">Email Address</label>
+                    <input type="email" id="resetEmail" required>
+                    <div class="error-message" id="resetEmailError"></div>
+                </div>
+                <button type="submit" class="btn primary auth-btn">Send Reset Link</button>
+            </form>
+            <div id="resetSuccessMessage" class="success-message" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <p>Password reset link has been sent to your email!</p>
             </div>
         </div>
     </div>

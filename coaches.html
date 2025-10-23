@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Coaches - BetterSkillCoaching</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/04125a405c.js" crossorigin="anonymous"></script>
+    <style>
+        /* Additional styles for coaches page */
+        .coaches-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6495ED;
+        }
+
+        .filter-options {
+            display: flex;
+            gap: 15px;
+        }
+
+        .filter-options select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .pagination-btn {
+            padding: 8px 16px;
+            background-color: #6495ED;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .pagination-btn:hover {
+            background-color: #4a7de0;
+        }
+
+        .pagination-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #pageInfo {
+            font-weight: 600;
+            color: #6495ED;
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .no-results p {
+            font-size: 1.2rem;
+        }
+
+        /* Coach avatars */
+        .coach-avatar {
+            width: 100%;
+            height: 200px;
+            background-color: #6495ED;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .coaches-filter {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+            }
+            
+            .pagination {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="photos/NEW LOGO.jpg" alt="Logo">
+                <span>BetterSkillCoaching</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="coaches.html" class="active"><i class="fa-solid fa-user"></i> Coaches</a></li>
+                    <li><a href="index.html"><i class="fa-solid fa-gamepad"></i> Games</a></li>
+                    <li><a href="index.html"><i class="fa-solid fa-money-bill"></i> Pricing</a></li>
+                    <li><a href="index.html"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn login" onclick="window.location.href='login.html'">Log In</button>
+                <button class="btn signup" onclick="window.location.href='signup.html'">Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="coaches-section">
+        <div class="container">
+            <h2>All Coaches</h2>
+            
+            <!-- Search and Filter Section -->
+            <div class="coaches-filter">
+                <div class="search-box">
+                    <input type="text" id="coachSearch" placeholder="Search coaches by name or game...">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="filter-options">
+                    <select id="gameFilter">
+                        <option value="">All Games</option>
+                        <option value="League of Legends">League of Legends</option>
+                        <option value="Valorant">Valorant</option>
+                        <option value="CS:GO">CS:GO</option>
+                        <option value="Dota 2">Dota 2</option>
+                        <option value="Fortnite">Fortnite</option>
+                        <option value="Overwatch">Overwatch</option>
+                        <option value="Apex Legends">Apex Legends</option>
+                    </select>
+                    <select id="sortFilter">
+                        <option value="rating">Highest Rated</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Alphabetical</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Coaches Grid -->
+            <div class="coaches-grid" id="coachesGrid">
+                <!-- Coaches will be populated by JavaScript -->
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <button id="prevPage" class="pagination-btn">Previous</button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button id="nextPage" class="pagination-btn">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BetterSkillCoaching</h3>
+                    <p>Connecting gamers with professional coaches to help them reach their full potential.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                        <li><a href="coaches.html"><i class="fa-solid fa-user"></i> Coaches</a></li>
+                        <li><a href="index.html"><i class="fa-solid fa-gamepad"></i> Games</a></li>
+                        <li><a href="index.html"><i class="fa-solid fa-money-bill"></i> Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@BetterSkillCoaching.gg</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-twitch"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 BetterSkillCoaching.gg. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample coach data with cartoonish avatars
+        const allCoaches = [
+            {
+                id: 1,
+                name: "Alex Johnson",
+                game: "League of Legends",
+                rank: "Challenger",
+                price: "$25/session",
+                rating: "★★★★★",
+                bio: "Former pro player with 5 years coaching experience. Specialized in jungle and macro play.",
+                avatar: "AJ",
+                ratingValue: 5
+            },
+            {
+                id: 2,
+                name: "Sarah Miller",
+                game: "Valorant",
+                rank: "Radiant",
+                price: "$30/session",
+                rating: "★★★★☆",
+                bio: "Focuses on aim training and game sense. Helped 50+ students reach Immortal.",
+                avatar: "SM",
+                ratingValue: 4.5
+            },
+            {
+                id: 3,
+                name: "Mike Chen",
+                game: "Dota 2",
+                rank: "Immortal",
+                price: "$20/session",
+                rating: "★★★★★",
+                bio: "Mid lane specialist with deep understanding of matchups and power spikes.",
+                avatar: "MC",
+                ratingValue: 5
+            },
+            {
+                id: 4,
+                name: "David Wilson",
+                game: "CS:GO",
+                rank: "Global Elite",
+                price: "$22/session",
+                rating: "★★★★☆",
+                bio: "Focuses on team play, utility usage, and clutch situations.",
+                avatar: "DW",
+                ratingValue: 4.5
+            },
+            {
+                id: 5,
+                name: "Emma Rodriguez",
+                game: "League of Legends",
+                rank: "Grandmaster",
+                price: "$18/session",
+                rating: "★★★★☆",
+                bio: "ADC specialist with focus on positioning and team fighting.",
+                avatar: "ER",
+                ratingValue: 4
+            },
+            {
+                id: 6,
+                name: "James Kim",
+                game: "Valorant",
+                rank: "Immortal",
+                price: "$28/session",
+                rating: "★★★★★",
+                bio: "Former professional Valorant player with tournament experience.",
+                avatar: "JK",
+                ratingValue: 5
+            },
+            {
+                id: 7,
+                name: "Lisa Wang",
+                game: "Overwatch",
+                rank: "Grandmaster",
+                price: "$24/session",
+                rating: "★★★★☆",
+                bio: "Support main with expertise in shot calling and team coordination.",
+                avatar: "LW",
+                ratingValue: 4.5
+            },
+            {
+                id: 8,
+                name: "Carlos Martinez",
+                game: "Fortnite",
+                rank: "Champion",
+                price: "$26/session",
+                rating: "★★★★★",
+                bio: "Building and editing specialist with competitive tournament wins.",
+                avatar: "CM",
+                ratingValue: 5
+            },
+            {
+                id: 9,
+                name: "Sophie Turner",
+                game: "Apex Legends",
+                rank: "Predator",
+                price: "$23/session",
+                rating: "★★★★☆",
+                bio: "Movement and positioning expert with focus on ranked grind strategies.",
+                avatar: "ST",
+                ratingValue: 4.5
+            },
+            {
+                id: 10,
+                name: "Ryan Clark",
+                game: "CS:GO",
+                rank: "Global Elite",
+                price: "$27/session",
+                rating: "★★★★★",
+                bio: "AWPer with focus on angle holding and reaction time training.",
+                avatar: "RC",
+                ratingValue: 5
+            },
+            {
+                id: 11,
+                name: "Maya Patel",
+                game: "Dota 2",
+                rank: "Immortal",
+                price: "$21/session",
+                rating: "★★★★☆",
+                bio: "Support player specializing in warding and map control strategies.",
+                avatar: "MP",
+                ratingValue: 4
+            },
+            {
+                id: 12,
+                name: "Daniel Brown",
+                game: "League of Legends",
+                rank: "Challenger",
+                price: "$29/session",
+                rating: "★★★★★",
+                bio: "Top lane specialist with deep knowledge of matchups and wave management.",
+                avatar: "DB",
+                ratingValue: 5
+            }
+        ];
+
+        // Pagination variables
+        let currentPage = 1;
+        const coachesPerPage = 6;
+        let filteredCoaches = [...allCoaches];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the coaches page
+            displayCoaches();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Search functionality
+            const searchInput = document.getElementById('coachSearch');
+            searchInput.addEventListener('input', filterCoaches);
+            
+            // Filter functionality
+            const gameFilter = document.getElementById('gameFilter');
+            gameFilter.addEventListener('change', filterCoaches);
+            
+            // Sort functionality
+            const sortFilter = document.getElementById('sortFilter');
+            sortFilter.addEventListener('change', filterCoaches);
+            
+            // Pagination
+            document.getElementById('prevPage').addEventListener('click', goToPreviousPage);
+            document.getElementById('nextPage').addEventListener('click', goToNextPage);
+        }
+
+        function filterCoaches() {
+            const searchTerm = document.getElementById('coachSearch').value.toLowerCase();
+            const gameFilterValue = document.getElementById('gameFilter').value;
+            const sortValue = document.getElementById('sortFilter').value;
+            
+            // Filter coaches based on search and game filter
+            filteredCoaches = allCoaches.filter(coach => {
+                const matchesSearch = coach.name.toLowerCase().includes(searchTerm) || 
+                                     coach.game.toLowerCase().includes(searchTerm) ||
+                                     coach.bio.toLowerCase().includes(searchTerm);
+                const matchesGame = gameFilterValue === '' || coach.game === gameFilterValue;
+                
+                return matchesSearch && matchesGame;
+            });
+            
+            // Sort coaches based on selected option
+            switch(sortValue) {
+                case 'rating':
+                    filteredCoaches.sort((a, b) => b.ratingValue - a.ratingValue);
+                    break;
+                case 'price-low':
+                    filteredCoaches.sort((a, b) => {
+                        const priceA = parseInt(a.price.replace('$', '').replace('/session', ''));
+                        const priceB = parseInt(b.price.replace('$', '').replace('/session', ''));
+                        return priceA - priceB;
+                    });
+                    break;
+                case 'price-high':
+                    filteredCoaches.sort((a, b) => {
+                        const priceA = parseInt(a.price.replace('$', '').replace('/session', ''));
+                        const priceB = parseInt(b.price.replace('$', '').replace('/session', ''));
+                        return priceB - priceA;
+                    });
+                    break;
+                case 'name':
+                    filteredCoaches.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+            }
+            
+            // Reset to first page and display filtered results
+            currentPage = 1;
+            displayCoaches();
+        }
+
+        function displayCoaches() {
+            const coachesGrid = document.getElementById('coachesGrid');
+            const paginationElement = document.getElementById('pagination');
+            const pageInfoElement = document.getElementById('pageInfo');
+            const prevButton = document.getElementById('prevPage');
+            const nextButton = document.getElementById('nextPage');
+            
+            // Calculate pagination
+            const totalPages = Math.ceil(filteredCoaches.length / coachesPerPage);
+            const startIndex = (currentPage - 1) * coachesPerPage;
+            const endIndex = Math.min(startIndex + coachesPerPage, filteredCoaches.length);
+            const currentCoaches = filteredCoaches.slice(startIndex, endIndex);
+            
+            // Clear previous results
+            coachesGrid.innerHTML = '';
+            
+            // Display current coaches
+            if (currentCoaches.length === 0) {
+                coachesGrid.innerHTML = '<div class="no-results"><p>No coaches found matching your criteria.</p></div>';
+            } else {
+                currentCoaches.forEach(coach => {
+                    const coachCard = document.createElement('div');
+                    coachCard.className = 'coach-card';
+                    
+                    coachCard.innerHTML = `
+                        <div class="coach-avatar">
+                            ${coach.avatar}
+                        </div>
+                        <div class="coach-info">
+                            <h3>${coach.name}</h3>
+                            <div class="coach-game">${coach.game}</div>
+                            <span class="coach-rank">${coach.rank}</span>
+                            <div class="coach-price">${coach.price}</div>
+                            <div class="coach-rating">${coach.rating}</div>
+                            <p class="coach-bio">${coach.bio}</p>
+                            <button class="btn primary">Book Session</button>
+                        </div>
+                    `;
+                    
+                    coachesGrid.appendChild(coachCard);
+                });
+            }
+            
+            // Update pagination controls
+            pageInfoElement.textContent = `Page ${currentPage} of ${totalPages}`;
+            prevButton.disabled = currentPage === 1;
+            nextButton.disabled = currentPage === totalPages || totalPages === 0;
+            
+            // Show/hide pagination based on number of pages
+            paginationElement.style.display = totalPages <= 1 ? 'none' : 'flex';
+        }
+
+        function goToPreviousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                displayCoaches();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function goToNextPage() {
+            const totalPages = Math.ceil(filteredCoaches.length / coachesPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                displayCoaches();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
